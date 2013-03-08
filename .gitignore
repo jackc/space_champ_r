@@ -1,3 +1,0 @@
-# Don't include native shared libraries and jars
-*.jar
-*.dll

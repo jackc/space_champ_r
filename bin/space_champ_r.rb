@@ -1,31 +1,26 @@
-$LOAD_PATH.push File.expand_path('../../vendor', __FILE__)
+require 'gosu'
 
-require 'java'
-require 'lwjgl.jar'
-require 'slick.jar'
-
-java_import org.newdawn.slick.BasicGame
-java_import org.newdawn.slick.GameContainer
-java_import org.newdawn.slick.Graphics
-java_import org.newdawn.slick.Image
-java_import org.newdawn.slick.Input
-java_import org.newdawn.slick.SlickException
-java_import org.newdawn.slick.AppGameContainer
-
-class SpaceChampR < BasicGame
-  def render(container, graphics)
-    graphics.draw_string('Space Champ R (ESC to exit)', 8, container.height - 30)
+class SpaceChampRWindow < Gosu::Window
+  def initialize
+   super(640, 480, false)
+   self.caption = 'Space Champ R'
+   @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
   end
 
-  def init(container)
+  def update
   end
 
-  def update(container, delta)
-    input = container.get_input
-    container.exit if input.is_key_down(Input::KEY_ESCAPE)
+  def draw
+    @font.draw "Space Champ R (ESC to exit)", 10, 10, 1
+    @font.draw Time.now.strftime('%m/%d/%Y %I:%M:%S %p'), 10, 50, 1
+  end
+
+  def button_down(id)
+    if id == Gosu::KbEscape
+      close
+    end
   end
 end
 
-app = AppGameContainer.new(SpaceChampR.new('Space Champ R'))
-app.set_display_mode(640, 480, false)
-app.start
+window = SpaceChampRWindow.new
+window.show
