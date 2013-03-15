@@ -7,27 +7,6 @@ $LOAD_PATH.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
 require 'vector2d'
 require 'battle'
 
-class PlayerController
-  attr_reader :window
-
-  def initialize(window)
-    @window = window
-  end
-
-  def thrust?
-    window.button_down? Gosu::KbUp
-  end
-
-  def left?
-    window.button_down? Gosu::KbLeft
-  end
-
-  def right?
-    window.button_down? Gosu::KbRight
-  end
-end
-
-
 class SpaceChampRWindow < Gosu::Window
   def initialize
    super(640, 480, false)
@@ -35,7 +14,7 @@ class SpaceChampRWindow < Gosu::Window
    @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
    @image = Gosu::Image.new self, 'resources/images/cruiser.bmp'
    @ship_sprite = Gosu::Image.load_tiles self, 'resources/images/cruiser.bmp', 96, 96, false
-   @player_controller = PlayerController.new self
+   @player_controller = Battle::PlayerController.new self
    @ship = Battle::Ship.new sprite: @ship_sprite,
     position: Vector2d.new(0, 0),
     direction: 0,
