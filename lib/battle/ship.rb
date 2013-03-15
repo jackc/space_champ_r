@@ -8,7 +8,7 @@ module Battle
     attr_reader :renderer
     attr_reader :controller
 
-    def initialize(renderer: nil, position: Vector2d.new(0,0), direction: Vector2d.new(0,0), controller: nil)
+    def initialize(renderer: nil, position: Vector2d.new(0,0), direction: 0, controller: nil)
       @position = position
       @velocity = Vector2d.new(0,0)
       @direction = direction
