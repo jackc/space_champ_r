@@ -1,0 +1,1 @@
+require_relative 'battle/ship'

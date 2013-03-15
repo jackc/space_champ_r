@@ -1,16 +1,11 @@
+require 'bundler'
+Bundler.setup(:default)
+
 require 'gosu'
 
-class Vector2d
-  attr_reader :x, :y
-
-  def initialize(x, y)
-    @x, @y = x, y
-  end
-
-  def +(other)
-    Vector2d.new x + other.x, y + other.y
-  end
-end
+$LOAD_PATH.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+require 'vector2d'
+require 'battle'
 
 class PlayerController
   attr_reader :window
@@ -32,47 +27,6 @@ class PlayerController
   end
 end
 
-class Ship
-  attr_reader :position
-  attr_reader :velocity
-  attr_reader :direction
-  attr_reader :sprite
-  attr_reader :controller
-
-  def initialize(sprite, position, direction, controller)
-    @position = position
-    @velocity = Vector2d.new(0, 0)
-    @direction = direction
-    @sprite = sprite
-    @controller = controller
-  end
-
-  def update
-    # @position += Vector2d.new(0, 1) if controller.thrust?
-    @direction -= 0.1 if controller.left?
-    @direction += 0.1 if controller.right?
-    @direction += (Math::PI * 2) while @direction < 0
-    @direction -= (Math::PI * 2) while (Math::PI * 2) < @direction
-
-    if controller.thrust?
-      acceleration = Vector2d.new(
-        Math.sin(direction) * 0.1,
-        -Math.cos(direction) * 0.1
-      )
-      @velocity += acceleration
-    end
-
-    @position += @velocity
-    # @position += Vector2d.new(-1, 0) if controller.left?
-    # @position += Vector2d.new(1, 0) if controller.right?
-  end
-
-  def draw
-    frame = (64.0 / (Math::PI * 2) * direction).to_i
-    @sprite[frame].draw position.x, position.y, 0
-  end
-end
-
 
 class SpaceChampRWindow < Gosu::Window
   def initialize
@@ -82,7 +36,10 @@ class SpaceChampRWindow < Gosu::Window
    @image = Gosu::Image.new self, 'resources/images/cruiser.bmp'
    @ship_sprite = Gosu::Image.load_tiles self, 'resources/images/cruiser.bmp', 96, 96, false
    @player_controller = PlayerController.new self
-   @ship = Ship.new @ship_sprite, Vector2d.new(0, 0), 0, @player_controller
+   @ship = Battle::Ship.new sprite: @ship_sprite,
+    position: Vector2d.new(0, 0),
+    direction: 0,
+    controller: @player_controller
   end
 
   def update
