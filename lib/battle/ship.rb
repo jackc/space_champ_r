@@ -5,14 +5,14 @@ module Battle
     attr_reader :position
     attr_reader :velocity
     attr_reader :direction
-    attr_reader :sprite
+    attr_reader :renderer
     attr_reader :controller
 
-    def initialize(sprite: nil, position: Vector2d.new(0,0), direction: Vector2d.new(0,0), controller: nil)
+    def initialize(renderer: nil, position: Vector2d.new(0,0), direction: Vector2d.new(0,0), controller: nil)
       @position = position
       @velocity = Vector2d.new(0,0)
       @direction = direction
-      @sprite = sprite
+      @renderer = renderer
       @controller = controller
     end
 
@@ -21,7 +21,7 @@ module Battle
       @direction -= 0.1 if controller.left?
       @direction += 0.1 if controller.right?
       @direction += (Math::PI * 2) while @direction < 0
-      @direction -= (Math::PI * 2) while (Math::PI * 2) < @direction
+      @direction -= (Math::PI * 2) while (Math::PI * 2) <= @direction
 
       if controller.thrust?
         acceleration = Vector2d.new(
@@ -37,8 +37,7 @@ module Battle
     end
 
     def draw
-      frame = (64.0 / (Math::PI * 2) * direction).to_i
-      @sprite[frame].draw position.x, position.y, 0
+      renderer.draw(self)
     end
   end
 end
