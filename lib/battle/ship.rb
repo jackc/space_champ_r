@@ -17,7 +17,6 @@ module Battle
     end
 
     def update
-      # @position += Vector2d.new(0, 1) if controller.thrust?
       @direction -= 0.1 if controller.left?
       @direction += 0.1 if controller.right?
       @direction += (Math::PI * 2) while @direction < 0
@@ -32,8 +31,6 @@ module Battle
       end
 
       @position += @velocity
-      # @position += Vector2d.new(-1, 0) if controller.left?
-      # @position += Vector2d.new(1, 0) if controller.right?
     end
 
     def draw
