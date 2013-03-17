@@ -19,10 +19,13 @@ class SpaceChampRWindow < Gosu::Window
       position: Vector2d.new(0, 0),
       direction: 0,
       controller: @player_controller
+    @arena = Battle::Arena.new size: Vector2d(640, 480)
+    @arena.ships.push @ship
   end
 
   def update
     @ship.update
+    @arena.update
   end
 
   def draw
