@@ -6,7 +6,7 @@ class Vector2d
   end
 
   def +(other)
-    Vector2d.new x + other.x, y + other.y
+    self.class.new x + other.x, y + other.y
   end
 
   def *(scalar)
