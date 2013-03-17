@@ -12,6 +12,14 @@ class Vector2d
   def *(scalar)
     self.class.new x * scalar, y * scalar
   end
+
+  def ==(other)
+    x == other.x && y == other.y
+  end
+
+  def inspect
+    "<Vector2d(#{x}, #{y})"
+  end
 end
 
 def Vector2d(x, y)

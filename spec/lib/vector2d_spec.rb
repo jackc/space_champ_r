@@ -29,4 +29,18 @@ describe 'Vector2d' do
       expect(result.y).to eq 4
     end
   end
+
+  describe '==' do
+    it 'is true on exact x and y equality' do
+      expect(Vector2d(1, 2)).to eq Vector2d(1, 2)
+    end
+
+    it 'is false on x inequality' do
+      expect(Vector2d(1, 2)).to_not eq Vector2d(2, 2)
+    end
+
+    it 'is false on y inequality' do
+      expect(Vector2d(1, 2)).to_not eq Vector2d(2, 1)
+    end
+  end
 end
