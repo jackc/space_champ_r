@@ -20,4 +20,13 @@ describe 'Vector2d' do
       expect(result.y).to eq 6
     end
   end
+
+  describe '*' do
+    it 'returns a new Vector2d multiplied by the argument' do
+      v = Vector2d(1, 2)
+      result = v * 2
+      expect(result.x).to eq 2
+      expect(result.y).to eq 4
+    end
+  end
 end

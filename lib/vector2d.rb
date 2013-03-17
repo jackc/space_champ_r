@@ -8,6 +8,10 @@ class Vector2d
   def +(other)
     Vector2d.new x + other.x, y + other.y
   end
+
+  def *(scalar)
+    self.class.new x * scalar, y * scalar
+  end
 end
 
 def Vector2d(x, y)
