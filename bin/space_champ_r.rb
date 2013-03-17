@@ -26,7 +26,6 @@ class SpaceChampRWindow < Gosu::Window
   end
 
   def draw
-    tile =
     @ship.draw
     @font.draw "Space Champ R (ESC to exit)", 10, 10, 1
     @font.draw Time.now.strftime('%m/%d/%Y %I:%M:%S %p'), 10, 50, 1
