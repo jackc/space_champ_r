@@ -1,5 +1,7 @@
 class Vector2d
   attr_reader :x, :y
+  alias_method :width, :x
+  alias_method :height, :y
 
   def initialize(x, y)
     @x, @y = x, y
