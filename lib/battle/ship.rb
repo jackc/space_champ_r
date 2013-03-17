@@ -2,7 +2,7 @@ require 'vector2d'
 
 module Battle
   class Ship
-    attr_reader :position
+    attr_accessor :position
     attr_reader :velocity
     attr_reader :direction
     attr_reader :renderer

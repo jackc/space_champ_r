@@ -13,7 +13,10 @@ module Battle
     end
 
     def update
-      ships.each(&:update)
+      ships.each do |s|
+        s.update
+        s.position = s.position.wrap(size)
+      end
     end
   end
 end

@@ -38,4 +38,33 @@ describe 'Vector2d' do
       expect(Vector2d(1, 2)).to_not eq Vector2d(2, 1)
     end
   end
+
+  describe 'wrap' do
+    let(:bound) { Vector2d(10, 10) }
+
+    it 'wraps negative x' do
+      wrapped = Vector2d(-1, 0).wrap(bound)
+      expect(wrapped).to eq Vector2d(9, 0)
+    end
+
+    it 'wraps positive x past bound' do
+      wrapped = Vector2d(11, 0).wrap(bound)
+      expect(wrapped).to eq Vector2d(1, 0)
+    end
+
+    it 'wraps negative y' do
+      wrapped = Vector2d(0, -1).wrap(bound)
+      expect(wrapped).to eq Vector2d(0, 9)
+    end
+
+    it 'wraps positive y past bound' do
+      wrapped = Vector2d(0, 11).wrap(bound)
+      expect(wrapped).to eq Vector2d(0, 1)
+    end
+
+    it 'is unchanged when within bound' do
+      wrapped = Vector2d(5, 5).wrap(bound)
+      expect(wrapped).to eq Vector2d(5, 5)
+    end
+  end
 end
