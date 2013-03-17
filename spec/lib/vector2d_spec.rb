@@ -21,9 +21,7 @@ describe 'Vector2d' do
   describe '*' do
     it 'returns a new Vector2d multiplied by the argument' do
       v = Vector2d(1, 2)
-      result = v * 2
-      expect(result.x).to eq 2
-      expect(result.y).to eq 4
+      expect(v * 2).to eq Vector2d(2, 4)
     end
   end
 
